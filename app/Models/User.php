@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Followable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -11,7 +13,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, Followable;
 
     /**
      * The attributes that are mass assignable.
@@ -45,7 +47,6 @@ class User extends Authenticatable
     ];
 
 
-
     /**
      * Get all of the user for the Tweet
      *
@@ -54,5 +55,24 @@ class User extends Authenticatable
     public function user(): HasMany
     {
         return $this->hasMany(Tweet::class);
+    }
+
+    public function getAvatarAttribute($value): string
+    {
+
+        return asset($value ?? '/images/default-avatar.jpeg');
+    }
+
+    public function path($append = ''): string
+    {
+
+        $path = route('profile', $this->name);
+        return $append ? "{$path}/{$append}" : $path;
+    }
+
+    public function current_user()
+    {
+
+        return auth()->user();
     }
 }
