@@ -91,9 +91,4 @@ class User extends Authenticatable
         $path = route('profile', $this->name);
         return $append ? "{$path}/{$append}" : $path;
     }
-
-    public function current_user()
-    {
-        return auth()->user();
-    }
 }
