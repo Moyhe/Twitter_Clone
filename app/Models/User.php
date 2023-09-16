@@ -48,13 +48,35 @@ class User extends Authenticatable
 
 
     /**
-     * Get all of the user for the Tweet
+     * Get all of the tweets for the Tweet
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function user(): HasMany
+    public function tweets(): HasMany
     {
-        return $this->hasMany(Tweet::class);
+        return $this->hasMany(Tweet::class)->latest();
+    }
+
+    /**
+     * Get all of the likes for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function likes(): HasMany
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function timeLine()
+    {
+        $friends = $this->follows()->pluck('id');
+
+        return Tweet::query()
+            ->whereIn('user_id', $friends)
+            ->orWhere('user_id', $this->id)
+            ->withLikes()
+            ->orderByDesc('id')
+            ->paginate(50);
     }
 
     public function getAvatarAttribute($value): string
@@ -72,7 +94,6 @@ class User extends Authenticatable
 
     public function current_user()
     {
-
         return auth()->user();
     }
 }

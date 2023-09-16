@@ -2,21 +2,21 @@
 
 namespace App\Models;
 
+use App\Likable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-
 class Tweet extends Model
 {
-    use HasFactory;
+    use HasFactory, Likable;
 
     /**
-     * Get the tweets that owns the User
+     * Get the user that owns the User
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function tweets(): BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

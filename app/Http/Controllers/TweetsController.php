@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tweet;
-use Illuminate\Http\Request;
 
 class TweetsController extends Controller
 {
@@ -12,54 +11,25 @@ class TweetsController extends Controller
      */
     public function index()
     {
-        //
+        $tweets = auth()->user()->timeLine();
+        return view('tweets.index', compact('tweets'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
-    }
+        $attributes = request()->validate([
+            'content' => 'required|max:255',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Tweet $tweet)
-    {
-        //
-    }
+        Tweet::create([
+            'user_id' => auth()->id(),
+            'content' => $attributes['content'],
+        ]);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Tweet $tweet)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Tweet $tweet)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Tweet $tweet)
-    {
-        //
+        return redirect()->route('home');
     }
 }
