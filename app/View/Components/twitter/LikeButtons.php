@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\tweeter;
+namespace App\View\Components\twitter;
 
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -21,6 +21,6 @@ class LikeButtons extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.tweeter.like-buttons');
+        return view('components.twitter.like-buttons');
     }
 }
