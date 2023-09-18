@@ -17,23 +17,42 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-        @include('layouts.navigation')
+    <div class="min-h-screen bg-white">
 
         <!-- Page Heading -->
         @if (isset($header))
-            <header class="bg-white dark:bg-gray-800 shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <section class="px-8 py-4 mb-6">
+                <header class="container mx-auto">
+
                     {{ $header }}
-                </div>
-            </header>
+
+                </header>
+            </section>
         @endif
 
         <!-- Page Content -->
-        <main>
-            {{ $slot }}
-        </main>
+        <section class="px-8">
+            <main class="container mx-auto">
+                <div class="lg:flex lg:justify-center">
+                    <div class="lg:w-32">
+                        <x-twitter.sidebar-links />
+                    </div>
+
+                    <div class="lg:flex-1 lg:mx-10 lg:mb-10" style="max-width: 700px">
+                        {{ $slot }}
+                    </div>
+
+                    @auth
+                        <div class="lg:w-1/6">
+                            <x-twitter.friends-list />
+                        </div>
+                    @endauth
+                </div>
+            </main>
+        </section>
     </div>
+
+    <script src="http://unpkg.com/turbolinks"></script>
 </body>
 
 </html>

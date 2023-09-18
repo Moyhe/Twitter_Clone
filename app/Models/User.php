@@ -71,13 +71,19 @@ class User extends Authenticatable
     public function getAvatarAttribute($value): string
     {
 
-        return asset($value ?? '/images/default-avatar.jpeg');
+        return asset($value ?: '/images/default-avatar.jpeg');
     }
 
     public function path($append = ''): string
     {
 
-        $path = route('profile', $this->name);
+        $path = route('profile.show', $this->username);
         return $append ? "{$path}/{$append}" : $path;
+    }
+
+
+    public function editProfile(): string
+    {
+        return route('profile.edit', $this->username);
     }
 }

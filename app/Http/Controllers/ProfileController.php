@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,9 +17,20 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+
         return view('profile.edit', [
             'user' => $request->user(),
         ]);
+    }
+
+    public function show(User $user)
+    {
+        $tweets = $user
+            ->tweets()
+            ->withLikes()
+            ->paginate(50);
+
+        return view('profile.show', compact('user', 'tweets'));
     }
 
     /**
@@ -34,7 +46,7 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return Redirect::route('profile.edit', auth()->user()->username)->with('status', 'profile-updated');
     }
 
     /**

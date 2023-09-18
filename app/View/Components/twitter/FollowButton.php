@@ -6,13 +6,14 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class LikeButtons extends Component
+class FollowButton extends Component
 {
     /**
      * Create a new component instance.
      */
-    public function __construct(protected $tweet)
+    public function __construct(protected $user)
     {
+        //
     }
 
     /**
@@ -20,6 +21,6 @@ class LikeButtons extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.twitter.like-buttons');
+        return view('components.twitter.follow-button');
     }
 }
