@@ -1,8 +1,11 @@
 <div class="border border-blue-400 rounded-lg px-8 py-6 mb-8">
-    <form method="POST" action="/tweets">
+    <form method="POST" action="/tweets" enctype="multipart/form-data">
         @csrf
 
-        <textarea name="content" class="w-full border-none" placeholder="tweet" required autofocus></textarea>
+        <div class="mb-3">
+            <textarea name="content" class="w-full border-none mb-3" placeholder="tweet" required autofocus></textarea>
+            <x-text-input name="thumbnail" type="file" accept="image/*" class="mt-1 block w-full" />
+        </div>
 
         <hr class="my-4">
 
@@ -18,6 +21,10 @@
     </form>
 
     @error('content')
+        <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
+    @enderror
+
+    @error('thumbanail')
         <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
     @enderror
 </div>

@@ -16,6 +16,7 @@ class TweetsController extends Controller
     }
 
 
+
     /**
      * Store a newly created resource in storage.
      */
@@ -23,11 +24,17 @@ class TweetsController extends Controller
     {
         $attributes = request()->validate([
             'content' => 'required|max:255',
+            'thumbnail' => ['image', 'mimes:jpeg,png,jpg,gif,svg'],
         ]);
+
+
+        $imageRequest =  request()->file('thumbnail') ? request()->file('thumbnail')->store('tweets') : null;
+
 
         Tweet::create([
             'user_id' => auth()->id(),
             'content' => $attributes['content'],
+            'thumbnail' => $imageRequest
         ]);
 
         return redirect()->route('home');
