@@ -56,15 +56,33 @@ trait Likable
 
     public function like($user = null, $liked = true)
     {
-        $this->likes()->updateOrCreate(
 
-            [
-                'user_id' => $user ? $user->id : auth()->id(),
-            ],
-            [
-                'liked' => $liked
-            ]
+        $model = $this->likes()
+            ->getQuery()
+            ->where('user_id', $user->id)
+            ->orWhere('tweet_id', $this->id)
+            ->first();
 
-        );
+
+        if (!$model) {
+
+            $this->likes()->updateOrCreate(
+                [
+                    'user_id' =>  $user ? $user->id : auth()->id()
+                ],
+                [
+                    'liked' => $liked
+                ]
+            );
+
+            return;
+        }
+
+        if ($liked && $model->liked || !$liked && !$model->liked) {
+            $model->delete();
+        } else {
+            $model->liked = $liked;
+            $model->save();
+        }
     }
 }
