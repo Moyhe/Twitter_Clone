@@ -1,3 +1,5 @@
+@props(['tweets'])
+
 <div class="border border-gray-300 rounded-lg">
     @forelse ($tweets as $tweet)
         <x-twitter.tweet :tweet="$tweet" :loop="$loop" />

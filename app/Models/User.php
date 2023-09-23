@@ -33,6 +33,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+
     ];
 
 
@@ -68,10 +69,10 @@ class User extends Authenticatable
             ->paginate(50);
     }
 
-    public function getAvatarAttribute($value): string
+    public function getThumbnailAttribute($value): string
     {
 
-        return asset($value ?: '/images/default-avatar.jpeg');
+        return asset('storage/' . $value ?: '/images/default-avatar.jpeg');
     }
 
     public function path($append = ''): string

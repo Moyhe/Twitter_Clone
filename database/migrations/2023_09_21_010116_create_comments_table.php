@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('likes', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('tweet_id')->constrained()->cascadeOnDelete();
-            $table->boolean('liked');
+            $table->longText('comment');
+            $table->foreignId('tweet_id')->constrained();
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('parent_id')->nullable()->constrained('comments');
             $table->timestamps();
-
-            $table->unique(['user_id', 'tweet_id']);
         });
     }
 
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('likes');
+        Schema::dropIfExists('comments');
     }
 };

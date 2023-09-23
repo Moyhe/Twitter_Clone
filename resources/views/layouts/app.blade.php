@@ -14,6 +14,7 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
 </head>
 
 <body class="font-sans antialiased">
@@ -51,7 +52,7 @@
             </main>
         </section>
     </div>
-
+    @livewireScripts
     <script src="http://unpkg.com/turbolinks"></script>
 </body>
 

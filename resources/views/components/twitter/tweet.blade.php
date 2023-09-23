@@ -7,7 +7,7 @@
         </a>
     </div>
 
-    <div>
+    <div class="w-full h-auto">
         <h5 class="font-bold mb-2">
             <a href="{{ $tweet->user->path() }}">
                 {{ $tweet->user->name }}
@@ -18,8 +18,17 @@
             {{ $tweet->content }}
         </p>
 
+        @if ($tweet->thumbnail)
+            <div>
+                <img src="{{ $tweet->path() }}" alt="" class="mb-2 w-full h-auto rounded object-fit">
+            </div>
+        @endif
+
         @auth
             <x-twitter.like-buttons :tweet="$tweet" />
         @endauth
+
+        <livewire:comments :tweet="$tweet" />
+
     </div>
 </div>
