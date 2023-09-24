@@ -12,7 +12,7 @@
         <div class="relative">
             <img src="/images/cover.jpg" alt="" class="mb-2 w-full h-72">
 
-            <img src="{{ $user->avatar }}" alt=""
+            <img src="{{ $user->thumbnail }}" alt=""
                 class="rounded-full mr-2 absolute bottom-0 transform -translate-x-1/2 translate-y-1/2" style="left: 50%"
                 width="150">
         </div>

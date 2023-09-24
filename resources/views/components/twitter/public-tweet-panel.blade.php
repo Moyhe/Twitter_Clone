@@ -10,7 +10,7 @@
         <hr class="my-4">
 
         <footer class="flex justify-between items-center">
-            <img src="{{ auth()->user()->avatar }}" alt="your avatar" class="rounded-full mr-2" width="50"
+            <img src="{{ auth()->user()->thumbnail }}" alt="your avatar" class="rounded-full mr-2" width="50"
                 height="50">
 
             <button type="submit"

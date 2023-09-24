@@ -2,7 +2,7 @@
 
 laravel 10 twitter clone with docker, Tailwindcss, livewire, and Alpine js.
 
-<!-- ![My logo](public/images/2023-08-07_03-17.png) -->
+![My logo](public/images/toukeChan.png)
 
 ## Demo
 

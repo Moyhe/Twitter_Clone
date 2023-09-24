@@ -72,8 +72,14 @@ class User extends Authenticatable
     public function getThumbnailAttribute($value): string
     {
 
-        return asset('storage/' . $value ?: '/images/default-avatar.jpeg');
+        return asset($value ?: '/images/default-avatar.jpeg');
     }
+
+    // public function getThumbnailAttribute($value): string
+    // {
+
+    //     return asset($value ? 'storage/' . $value : '/images/default-avatar.jpeg');
+    // }
 
     public function path($append = ''): string
     {
