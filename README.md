@@ -41,3 +41,13 @@ Access to the docker container
 5.Set encryption key
 
     php artisan key:generate --ansi
+
+## Features
+
+1. login, register, logout and profile for each user
+2. Follow and unfollow users
+3. like and dislike sysem
+4. comments on the tweet
+5. publish tweet with text and image
+6. home page for auth user tweets and other tweets
+7. pagination
