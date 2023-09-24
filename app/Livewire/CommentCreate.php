@@ -50,7 +50,7 @@ class CommentCreate extends Component
                 'parent_id' => $this->parentComment?->id
             ]);
 
-            $this->dispatch('comment-create', $comment->id);
+            $this->dispatch('comment-create', commentId: $comment->id);
             $this->comment = '';
         }
     }
