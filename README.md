@@ -1,6 +1,6 @@
 ## Twitter Clone
 
-laravel 10 twitter clone with docker, Tailwindcss, livewire 3, and Alpine js.
+laravel 10 twitter clone with docker, MySQL, Tailwindcss, livewire 3, and Alpine js.
 
 ![My logo](public/images/toukeChan.png)
 
